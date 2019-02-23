@@ -8,10 +8,12 @@ public class PozycjaTest {
     public void testTworzeniePozycji() {
         //given
         Pozycja pozycja = new Pozycja();
+
         //when
         pozycja.setNazwaTowaru("chleb");
         pozycja.setIleSztuk(2);
         pozycja.setCena(5.20);
+
         //then
         assertEquals("chleb", pozycja.getNazwaTowaru());
         assertEquals(2, pozycja.getIleSztuk());
@@ -22,6 +24,7 @@ public class PozycjaTest {
     public void testKonstruktoraZParametrami() {
         //given
         Pozycja pozycja1 = new Pozycja("chleb", 2, 5.20);
+
         //when
 
         //then
@@ -35,6 +38,7 @@ public class PozycjaTest {
     public void testObliczWartos() {
         //given
         Pozycja pozycja2 = new Pozycja("kielbasa", 3, 5.0);
+
         //when
         double wartoscPozycji = pozycja2.obliczWartosc();
 
@@ -58,8 +62,10 @@ public class PozycjaTest {
     public void testToString() {
         //given
         Pozycja pozycja3 = new Pozycja("chleb", 5, 10);
+
         //when
         System.out.println(pozycja3);
+
         //then
     }
 
@@ -67,8 +73,10 @@ public class PozycjaTest {
     public void testPromocjaPoniżej5Sztuk() {
         //given
         Pozycja pozycja = new Pozycja("chleb", 4, 10);
+
         //when
         double wartoscZRabatem = pozycja.obliczWartoscZRabatem();
+
         //then
         assertEquals(Double.valueOf(40), Double.valueOf(wartoscZRabatem));
     }
@@ -77,8 +85,10 @@ public class PozycjaTest {
     public void testPromocjaPwyżej5Sztuk() {
         //given
         Pozycja pozycja = new Pozycja("chleb", 6, 100);
+
         //when
         double wartoscZRabatem = pozycja.obliczWartoscZRabatem();
+
         //then
         assertEquals(Double.valueOf(570), Double.valueOf(wartoscZRabatem));
     }
@@ -87,8 +97,10 @@ public class PozycjaTest {
     public void testPromocjaPwyżej10Sztuk() {
         //given
         Pozycja pozycja = new Pozycja("chleb", 19, 100);
+
         //when
         double wartoscZRabatem = pozycja.obliczWartoscZRabatem();
+
         //then
         assertEquals(Double.valueOf(1710), Double.valueOf(wartoscZRabatem));
     }
@@ -97,8 +109,10 @@ public class PozycjaTest {
     public void testPromocjaPwyżej20Sztuk() {
         //given
         Pozycja pozycja = new Pozycja("chleb", 40, 100);
+
         //when
         double wartoscZRabatem = pozycja.obliczWartoscZRabatem();
+
         //then
         assertEquals(Double.valueOf(3400), Double.valueOf(wartoscZRabatem));
     }
