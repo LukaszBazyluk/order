@@ -121,7 +121,7 @@ public class Zamowienie {
                     );
                     zamowienie.dodajPozycje(pozycja);
                 } catch (NumberFormatException e) {
-                    // ignore
+                    System.out.println("Nie moge odczytac pozycji: '" + odczyt + "'");
                 }
             }
             return zamowienie;
