@@ -28,13 +28,11 @@ public class App {
                 case 1:
                     File folder = new File("pliki");
                     File[] listOfFiles = folder.listFiles();
-
                     for (File listOfFile : listOfFiles) {
                         Zamowienie zamowienie = Zamowienie.wczytajZamowienie(listOfFile.getName());
                         String key = listOfFile.getName().replace(".txt", "");
                         dane.put(key, zamowienie);
                     }
-
                     break;
                 case 2:
                     for (Map.Entry<String, Zamowienie> entry : dane.entrySet()) {
@@ -43,33 +41,36 @@ public class App {
                                 entry.getKey() + ".txt"
                         );
                     }
-
                     break;
                 case 3:
-                    boolean czyDodacPozycje = true;
                     Zamowienie zamowienie = new Zamowienie();
                     System.out.println("Podaj numer zamowienia");
                     dane.put(scanner.next(), zamowienie);
-                    do {
-                        System.out.println("Podaj nazwe towaru");
-                        String nazwa = scanner.next();
-                        System.out.println("Podaj cene towaru");
-                        double cena = scanner.nextDouble();
-                        System.out.println("Podaj ilosc towaru");
-                        int ilosc = scanner.nextInt();
-                        zamowienie.dodajPozycje(new Pozycja(nazwa, ilosc, cena));
-                        System.out.println("Czy dodac kolejna pozycje");
-                        czyDodacPozycje = scanner.nextBoolean();
-                    } while (czyDodacPozycje);
-
+                    dodajPozycje(scanner, zamowienie);
                     break;
                 case 4:
-
+                    System.out.println("Podaj numer zamówienia");
+                    String numerZamowienia = scanner.next();
+                    Zamowienie poszukiwaneZamowienie = dane.get(numerZamowienia);
+                    if (poszukiwaneZamowienie != null) {
+                        System.out.println("Czy edytować pozycję zamówienia? (t/n)");
+                        if (scanner.next().equals("t")) {
+                            edytujPozycje(scanner, poszukiwaneZamowienie);
+                        }
+                        System.out.println("Czy dodać nowa pozycję zamówienia? (t/n)");
+                        if (scanner.next().equals("t")) {
+                            dodajPozycje(scanner, poszukiwaneZamowienie);
+                        }
+                    } else {
+                        System.out.println("Nieudało się odnaleźć zamówienia o numerze " + poszukiwaneZamowienie);
+                    }
                     break;
                 case 5:
+                    System.out.println("##########################");
                     for (Map.Entry<String, Zamowienie> entry : dane.entrySet()) {
                         System.out.println("Zamowienie o nr: " + entry.getKey());
                         System.out.println(entry.getValue());
+                        System.out.println("##########################");
                     }
                     break;
                 case 0:
@@ -77,6 +78,52 @@ public class App {
                     break;
             }
         }
+    }
+
+    public static void edytujPozycje(Scanner scanner, Zamowienie zamowienie) {
+        boolean czyEdytowaVPozycje = true;
+        do {
+            System.out.println("Podaj numer pozycji na zamówieniu");
+            int numerPozycji = scanner.nextInt();
+
+            String nazwa = nazwaTowaru(scanner);
+            double cena = cenaTowaru(scanner);
+            int ilosc = iloscTowaru(scanner);
+
+            zamowienie.edytujPozycje(numerPozycji, nazwa, ilosc, cena);
+            System.out.println("Czy edytować kolejną pozycję? (t/n)");
+            String znak = scanner.next();
+            czyEdytowaVPozycje = znak.equals("t");
+        } while (czyEdytowaVPozycje);
+    }
+
+    public static void dodajPozycje(Scanner scanner, Zamowienie zamowienie) {
+        boolean czyDodacPozycje = true;
+        do {
+            String nazwa = nazwaTowaru(scanner);
+            double cena = cenaTowaru(scanner);
+            int ilosc = iloscTowaru(scanner);
+
+            zamowienie.dodajPozycje(new Pozycja(nazwa, ilosc, cena));
+            System.out.println("Czy dodac kolejna pozycje? (t/n)");
+            String znak = scanner.next();
+            czyDodacPozycje = znak.equals("t");
+        } while (czyDodacPozycje);
+    }
+
+    public static String nazwaTowaru(Scanner scanner) {
+        System.out.println("Podaj nazwe towaru?");
+        return scanner.next();
+    }
+
+    public static double cenaTowaru(Scanner scanner) {
+        System.out.println("Podaj cena towaru?");
+        return scanner.nextDouble();
+    }
+
+    public static int iloscTowaru(Scanner scanner) {
+        System.out.println("Podaj ilosc towaru?");
+        return scanner.nextInt();
     }
 
 }
