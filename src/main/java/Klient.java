@@ -3,6 +3,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.naming.Name;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,6 +20,11 @@ public class Klient {
 
     public Klient(String imie, String nazwisko, long pesel, String adres) {
         this.imie = sprawdzCzyNiePuste(imie, "Imię");
+        NameValidator nameValidator = new NameValidator(imie);
+        if (!nameValidator.valid()) {
+            throw new IllegalArgumentException("Niepoprawne zanki w imieniu.");
+        }
+
         this.nazwisko = sprawdzCzyNiePuste(nazwisko, "Nazwisko");
         if (PeselValidator.valid(pesel)) {
             this.pesel = pesel;
@@ -40,7 +47,8 @@ public class Klient {
     }
 
     private String sprawdzCzyNiePuste(String value, String message) {
-        if (value != null && value.length() > 0) {
+        EmptyValidator validator = new EmptyValidator(value);
+        if (validator.valid()) {
             return value;
         } else {
             throw new IllegalArgumentException("Pole: '" + message + "' nie może być puste");

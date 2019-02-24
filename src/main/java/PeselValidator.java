@@ -1,4 +1,4 @@
-public class PeselValidator {
+public class PeselValidator implements Validator {
     /**
      * Rozważmy PESEL osoby urodzonej 8 lipca 1902 roku, płci żeńskiej (parzysta końcówka numeru z serii – 0362). Czyli mamy wówczas 0207080362. Teraz kolejne cyfry należy przemnożyć przez odpowiednie wagi i dodać do siebie.
      * 0*1 + 2*3 + 0*7 + 7*9 + 0*1 + 8*3 + 0*7 + 3*9 + 6*1 + 2*3 = 0 + 6 + 0 + 63 + 0 + 24 + 0 + 27 + 6 + 6 = 132
@@ -36,5 +36,15 @@ public class PeselValidator {
         sumaKontrolna = sumaKontrolna % 10;
 
         return sumaKontrolna == Integer.valueOf(split[10]);
+    }
+
+    private long pesel;
+
+    public PeselValidator(long pesel) {
+        this.pesel = pesel;
+    }
+
+    public boolean valid() {
+        return valid(pesel);
     }
 }

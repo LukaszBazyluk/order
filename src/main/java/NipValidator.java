@@ -1,4 +1,4 @@
-public class NipValidator {
+public class NipValidator implements Validator {
 
     /**
      * Rozważmy sumę kontrolną NIP, wystawioną przez Urząd Skarbowy Poznań-Nowe Miasto.
@@ -32,5 +32,15 @@ public class NipValidator {
         sumaKontrolna = sumaKontrolna % 11;
 
         return sumaKontrolna == Integer.valueOf(split[9]);
+    }
+
+    private long nip;
+
+    public NipValidator(long nip) {
+        this.nip = nip;
+    }
+
+    public boolean valid() {
+        return valid(nip);
     }
 }
