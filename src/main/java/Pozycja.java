@@ -1,11 +1,12 @@
 import lombok.*;
 
-@EqualsAndHashCode
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
+@AllArgsConstructor
 public class Pozycja {
+
     private String nazwaTowaru;
     private int ileSztuk;
     private double cena;
@@ -15,7 +16,6 @@ public class Pozycja {
     }
 
     public String toString() {
-
         String output = String.format("%-20s", nazwaTowaru)
                 + String.format("%10.2f zł", cena)
                 + String.format("%4d szt.", ileSztuk)

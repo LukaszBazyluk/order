@@ -8,19 +8,17 @@ import java.util.List;
 import java.util.Scanner;
 
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
 @EqualsAndHashCode
+@AllArgsConstructor
 public class Zamowienie {
 
     private List<Pozycja> pozycje = new ArrayList<Pozycja>();
 
     public void dodajPozycje(Pozycja pozycja) {
-
         if (pozycja != null) {
-
             boolean czyZnaleziono = false;
             for (Pozycja pozycja1 : pozycje) {
                 if (pozycja1.getNazwaTowaru().equals(pozycja.getNazwaTowaru())
@@ -38,7 +36,6 @@ public class Zamowienie {
 
     public double obliczWartosc() {
         double suma = 0;
-
         for (Pozycja pozycja : pozycje) {
             suma = suma + pozycja.obliczWartosc();
         }
@@ -62,8 +59,6 @@ public class Zamowienie {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Nie ma pozycji o takim indeksie");
         }
-
-
     }
 
     public void edytujPozycje(int index, String nazwaTowaru, int ilosc, double cena) {
@@ -90,7 +85,6 @@ public class Zamowienie {
     public static void zapiszZamowienie(Zamowienie z, String nazwaPliku) {
         try {
             PrintWriter printWriter = new PrintWriter("pliki/" + nazwaPliku);
-
             for (Pozycja pozycja : z.getPozycje()) {
                 printWriter.print(pozycja.getNazwaTowaru());
                 printWriter.print("~");
@@ -100,7 +94,6 @@ public class Zamowienie {
                 printWriter.println();
             }
             printWriter.close();
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -112,7 +105,6 @@ public class Zamowienie {
             Zamowienie zamowienie = new Zamowienie();
             while (scanner.hasNextLine()) {
                 String odczyt = scanner.nextLine();
-
                 String[] split = odczyt.split("~");
                 try {
                     Pozycja pozycja = new Pozycja(split[0]
