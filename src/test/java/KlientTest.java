@@ -56,4 +56,75 @@ public class KlientTest {
 
         //then
     }
+
+    @Test
+    public void testKonstruktoraZPoprawnymNipem() {
+        //given
+        long nip = 7575820010L;
+        //when
+        Klient klient = new Klient("Kogucik", nip, "Błotna");
+
+        //then
+        assertEquals(nip, klient.getNip());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testKonstruktoraZNiepoprawnymNipem() {
+        //given
+        long nip = 1575820010L;
+        //when
+        Klient klient = new Klient("Kogucik", nip, "Błotna");
+
+        //then
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullowegoImienia() {
+        //given
+        String imie = null;
+        //when
+        Klient klient = new Klient(imie, "Kowalski", 54021422963l, "Błotna");
+
+        //then
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testPustegoImienia() {
+        //given
+        String imie = "";
+        //when
+        Klient klient = new Klient(imie, "Kowalski", 54021422963l, "Blotna");
+        //then
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testPustegoAdresu() {
+        //given
+        String adres = "";
+        //when
+        Klient klient = new Klient("Kogucik", 1547921397L, adres);
+        //then
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullowejNazwyFirmy() {
+        //given
+        String firma = null;
+        //when
+        Klient klient = new Klient(firma, 1547921397L, "Błotna");
+        //then
+
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testPustegoNazwiska() {
+        //given
+        String nazwisko = "";
+        //when
+        Klient klient = new Klient("Jan", nazwisko, 54021422963l, "Błotna");
+
+        //then
+
+
+    }
 }

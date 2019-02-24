@@ -1,11 +1,10 @@
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class App {
 
     private static Map<String, Zamowienie> dane = new HashMap<String, Zamowienie>();
+    private static Set<Klient> klients = new HashSet<Klient>();
 
     public static void main(String[] args) {
         System.out.println("Aplikacja wspomagajaca obsługe zamowień.");
@@ -19,6 +18,10 @@ public class App {
             System.out.println("3 - Dodaj nowe zamówiene");
             System.out.println("4 - Edytuj zamówienie");
             System.out.println("5 - Wyświetl podsumowanie zamówień");
+            System.out.println("6 - Dodaj klienta");
+            System.out.println("7 - Wyświetl bazę klientów");
+            System.out.println("8 - Zapis bazy klientów (plik)");
+            System.out.println("9 - Odczyt bazy klientów (plik)");
             System.out.println();
             System.out.println("0 - Wyście z programu");
             System.out.println("--------");
@@ -72,6 +75,60 @@ public class App {
                         System.out.println(entry.getValue());
                         System.out.println("##########################");
                     }
+                    break;
+                case 6:
+                    System.out.println("Czy chcesz dodać klienta indywidualnego czy firmę? (i/f)");
+                    if (scanner.next().equals("i")) {
+                        System.out.println("Podaj imię");
+                        String imie = scanner.next();
+                        System.out.println("Podaj nazwisko");
+                        String nazwisko = scanner.next();
+                        System.out.println("Podaj pesel");
+                        Long pesel = scanner.nextLong();
+                        System.out.println("Podaj adres");
+                        String adres = scanner.next();
+
+                        try {
+                            Klient klient = new Klient(imie, nazwisko, pesel, adres);
+                            klients.add(klient);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Nie można dodać klienta do bazy ponieważ dane są nieprawidłowe");
+                        }
+                    } else {
+                        System.out.println("Podaj nazwę firmy");
+                        String nazwa = scanner.next();
+                        System.out.println("Podaj NIP");
+                        Long nip = scanner.nextLong();
+                        System.out.println("Podaj adres");
+                        String adres = scanner.next();
+                        try {
+                            Klient klient = new Klient(nazwa, nip, adres);
+                            klients.add(klient);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Nie można dodać klienta do bazy ponieważ dane są nieprawidłowe");
+                        }
+                    }
+                    break;
+                case 7:
+                    for (Klient klient : klients) {
+                        if (klient.isFirma()) {
+                            System.out.println("Klient firmowy: \n" +
+                                    klient.getNazwaFirmy() + ", " +
+                                    klient.getNip() + ", " +
+                                    klient.getAdres());
+                        } else {
+                            System.out.println("Klient indywidualny: \n" +
+                                    klient.getImie() + ", " +
+                                    klient.getNazwisko() + ", " +
+                                    klient.getPesel() + ", " +
+                                    klient.getAdres());
+                        }
+
+                    }
+                    break;
+                case 8:
+                    break;
+                case 9:
                     break;
                 case 0:
                     exit = true;
