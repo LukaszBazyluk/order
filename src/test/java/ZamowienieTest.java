@@ -103,12 +103,12 @@ public class ZamowienieTest {
 
         zamowienie6.dodajPozycje(pozycja);
         zamowienie6.dodajPozycje(pozycja2);
+
         //when
         zamowienie6.usunPozycje(1);
+
         //then
         assertEquals(1, zamowienie6.getPozycje().size());
-        System.out.println(zamowienie6.getPozycje().get(0));
-
     }
 
     @Test
@@ -120,11 +120,12 @@ public class ZamowienieTest {
 
         zamowienie6.dodajPozycje(pozycja);
         zamowienie6.dodajPozycje(pozycja2);
+
         //when
         zamowienie6.usunPozycje(2);
+
         //then
         assertEquals(2, zamowienie6.getPozycje().size());
-
     }
 
     @Test
@@ -208,7 +209,6 @@ public class ZamowienieTest {
         assertEquals(Double.valueOf(pozycja.obliczWartoscZRabatem()
                         + pozycja2.obliczWartoscZRabatem() + pozycja3.obliczWartoscZRabatem())
                 , Double.valueOf(suma));
-        System.out.println(zamowienie9);
     }
 
     @Test

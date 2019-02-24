@@ -14,11 +14,11 @@ public class PeselValidator {
      * @return
      */
     public static boolean valid(long pesel) {
-        String peselNaStringu = String.valueOf(pesel);
+        final String peselNaStringu = String.valueOf(pesel);
         if (peselNaStringu.length() != 11) {
             return false;
         }
-        String[] split = peselNaStringu.split("");
+        final String[] split = peselNaStringu.split("");
         int sumaKontrolna = Integer.valueOf(split[0]) * 1 +
                 Integer.valueOf(split[1]) * 3 +
                 Integer.valueOf(split[2]) * 7 +

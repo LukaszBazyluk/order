@@ -107,9 +107,10 @@ public class Zamowienie {
                 String odczyt = scanner.nextLine();
                 String[] split = odczyt.split("~");
                 try {
-                    Pozycja pozycja = new Pozycja(split[0]
-                            , Integer.valueOf(split[1])
-                            , Double.valueOf(split[2])
+                    Pozycja pozycja = new Pozycja(
+                            split[0],
+                            Integer.valueOf(split[1]),
+                            Double.valueOf(split[2])
                     );
                     zamowienie.dodajPozycje(pozycja);
                 } catch (NumberFormatException e) {

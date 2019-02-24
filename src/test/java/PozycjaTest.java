@@ -64,9 +64,9 @@ public class PozycjaTest {
         Pozycja pozycja3 = new Pozycja("chleb", 5, 10);
 
         //when
-        System.out.println(pozycja3);
 
         //then
+        assertTrue(pozycja3.toString().contains("chleb"));
     }
 
     @Test

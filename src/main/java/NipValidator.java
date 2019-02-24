@@ -14,14 +14,11 @@ public class NipValidator {
      * @return
      */
     public static boolean valid(long nip) {
-
-        String nipString = String.valueOf(nip);
-
+        final String nipString = String.valueOf(nip);
         if (nipString.length() != 10) {
             return false;
         }
-        String[] split = nipString.split("");
-
+        final String[] split = nipString.split("");
         int sumaKontrolna = Integer.valueOf(split[0]) * 6 +
                 Integer.valueOf(split[1]) * 5 +
                 Integer.valueOf(split[2]) * 7 +

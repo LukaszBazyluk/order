@@ -17,7 +17,6 @@ public class Klient {
     private String adres;
 
     public Klient(String imie, String nazwisko, long pesel, String adres) {
-
         this.imie = sprawdzCzyNiePuste(imie, "Imię");
         this.nazwisko = sprawdzCzyNiePuste(nazwisko, "Nazwisko");
         if (PeselValidator.valid(pesel)) {
@@ -30,8 +29,8 @@ public class Klient {
     }
 
     public Klient(String nazwaFirmy, long nip, String adres) {
-        this.nazwaFirmy = sprawdzCzyNiePuste(nazwaFirmy, "Nazwa firmy");
         this.firma = true;
+        this.nazwaFirmy = sprawdzCzyNiePuste(nazwaFirmy, "Nazwa firmy");
         if (NipValidator.valid(nip)) {
             this.nip = nip;
         } else {
@@ -44,7 +43,7 @@ public class Klient {
         if (value != null && value.length() > 0) {
             return value;
         } else {
-            throw new IllegalArgumentException("Pole: " + message + " nie może być puste");
+            throw new IllegalArgumentException("Pole: '" + message + "' nie może być puste");
         }
     }
 }
